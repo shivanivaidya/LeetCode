@@ -16,17 +16,19 @@ Related problem: Reverse Words in a String II
 class Problem189 {
     public static void rotate(int[] nums, int k) {
         int n = nums.length;
-        int arr[] = new int[n];
-        
-        for(int i = n-1; i>=n; i++) {
-        	 if(i+k >= n)
-                arr[i] = nums[i+k-n];
-             else
-                 arr[i] = nums[i+k];
-        }
-        
-        for(int i = 0; i<n; i++) {
-            nums[i] = arr[i];
+        k %= n;
+        reverse(nums, 0, n-1);
+        reverse(nums, 0, k-1);
+        reverse(nums, k, n-1);
+    }
+    
+    public static void reverse(int[] nums, int start, int end) {
+        while(start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
         }
     }
 }
